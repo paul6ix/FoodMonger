@@ -1,0 +1,35 @@
+{% extends 'Food/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body>
+
+{% block body %}
+    {% for food in food_list %}
+        <div class="row">
+        <div class="col-md-3 offset-md-2">
+            <img class="card" src="{{ food.food_image }}">
+
+
+        </div>
+        <div class="col-md-4 offset-1">
+            <a href="{{  }}"><h3>{{ food.food_name }}</h3></a>
+            <h5>{{ food.food_desc }}</h5>
+            <h6>#{{ food.food_price }}</h6>
+
+        </div>
+        <div class="col-md-2">
+
+        </div>
+
+
+        </div>
+
+
+    {% endfor %}
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends 'Food/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food detail</title>
+</head>
+<body>
+{% block body %}
+<h1> {{ detail.food_name }}</h1>
+<h2>{{ detail.food_desc }}</h2>
+<h3>{{ detail.food_price }}</h3>
+{% endblock %}
+</body>
+</html>
