@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import model_food
+from .forms import FoodForm
 from django.template import loader
 
 
@@ -24,3 +25,15 @@ def food_detail(request, item_id):
         'detail': detail,
     }
     return render(request, 'Food/food_detail.html', context)
+
+
+def add_food(request):
+    form = FoodForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('index')
+    context = {
+        'form': form
+
+    }
+    return render(request, 'Food/add_food.html', context)

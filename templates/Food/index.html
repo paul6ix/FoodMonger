@@ -15,12 +15,13 @@
 
         </div>
         <div class="col-md-4 offset-1">
-            <a href="{{  }}"><h3>{{ food.food_name }}</h3></a>
+            <h3>{{ food.food_name }}</h3>
             <h5>{{ food.food_desc }}</h5>
             <h6>#{{ food.food_price }}</h6>
 
         </div>
         <div class="col-md-2">
+            <a href="{% url 'detail' food.id %}" class="btn btn-primary">View</a>
 
         </div>
 
