@@ -15,10 +15,6 @@ def index(request):
     return render(request, 'Food/index.html', context)
 
 
-def food_item(request):
-    return HttpResponse("This is the homepage")
-
-
 def food_detail(request, item_id):
     detail = model_food.objects.get(pk=item_id)
     context = {
@@ -37,3 +33,27 @@ def add_food(request):
 
     }
     return render(request, 'Food/add_food.html', context)
+
+
+def edit_food(request, id):
+    item = model_food.objects.get(id=id)
+    form = FoodForm(request.POST or None, instance=item)
+    if form.is_valid():
+        form.save()
+        return redirect('index')
+    context = {
+        'form': form,
+        'item': item
+    }
+    return render(request, 'Food/add_food.html', context)
+
+
+def delete_food(request, id):
+    item = model_food.objects.get(id=id)
+    item.delete()
+
+    context = {
+
+        'item': item
+    }
+    return render(request, 'Food/delete_food.html', context)
