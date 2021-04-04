@@ -18,7 +18,9 @@
                 <h1> {{ detail.food_name }}</h1>
                 <h2>{{ detail.food_desc }}</h2>
                 <h3>#{{ detail.food_price }}</h3>
+                <a href="{% url 'edit' detail.id %}">Edit</a><br>
                 <a href="{% url 'delete' detail.id %}"> Delete</a>
+
             </div>
         </div>
 
