@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import model_food
 from .forms import FoodForm
 from django.template import loader
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -23,6 +24,7 @@ def food_detail(request, item_id):
     return render(request, 'Food/food_detail.html', context)
 
 
+@login_required
 def add_food(request):
     form = FoodForm(request.POST or None)
     if form.is_valid():

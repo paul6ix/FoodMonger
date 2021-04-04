@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.template import loader
 from django.http import HttpResponse
 from .forms import RegisterForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -17,6 +18,12 @@ def user_registration(request):
     else:
         form = RegisterForm()
         context = {
-                'form': form
-            }
+            'form': form
+        }
         return render(request, 'Users/register.html', context)
+
+
+@login_required()
+def account(request):
+    context = {}
+    return render(request, 'Users/account.html', context)
