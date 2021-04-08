@@ -3,9 +3,9 @@ from . import views
 
 urlpatterns = [
     # main home
-    path('', views.index, name="index"),
+    path('', views.ClassViewIndex.as_view(), name="index"),
     # food details
-    path('<int:item_id>', views.food_detail, name="detail"),
+    path('<int:pk>', views.ClassFoodDetail.as_view(), name="detail"),
 
     # add food item
     path('add/', views.add_food, name="add"),

@@ -4,24 +4,38 @@ from .models import model_food
 from .forms import FoodForm
 from django.template import loader
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DetailView
 
 
 # Create your views here.
-def index(request):
-    food_list = model_food.objects.all()
-    context = {
-        'food_list': food_list
+# def index(request):
+#     food_list = model_food.objects.all()
+#     context = {
+#         'food_list': food_list
+#
+#     }
+#     return render(request, 'Food/index.html', context)
 
-    }
-    return render(request, 'Food/index.html', context)
+
+# implementing class based views in django
+class ClassViewIndex(ListView):
+    model = model_food
+    template_name = 'Food/index.html'
+    context_object_name = 'food_list'
 
 
-def food_detail(request, item_id):
-    detail = model_food.objects.get(pk=item_id)
-    context = {
-        'detail': detail,
-    }
-    return render(request, 'Food/food_detail.html', context)
+class ClassFoodDetail(DetailView):
+    model = model_food
+    template_name = 'Food/food_detail.html'
+    context_object_name = 'detail'
+
+
+# def food_detail(request, item_id):
+#     detail = model_food.objects.get(pk=item_id)
+#     context = {
+#         'detail': detail,
+#     }
+#     return render(request, 'Food/food_detail.html', context)
 
 
 @login_required
