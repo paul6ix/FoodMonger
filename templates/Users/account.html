@@ -1,8 +1,9 @@
 {% extends 'Food/base.html' %}
 
 {% block body %}
-<body>
-<h2> {{ user.username }}</h2>
-</body>
+    <body>
+    <h2> {{ user.username }}</h2>
+    <img height="300" width="300" src="{{ user.account.account_image.url }}">
+    </body>
 
 {% endblock %}
