@@ -8,7 +8,7 @@ urlpatterns = [
     path('<int:pk>', views.ClassFoodDetail.as_view(), name="detail"),
 
     # add food item
-    path('add/', views.add_food, name="add"),
+    path('add/', views.ClassAddFood.as_view(), name="add"),
     # edit food item
     path('edit/<int:id>', views.edit_food, name="edit"),
 

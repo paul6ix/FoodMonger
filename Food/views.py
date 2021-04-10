@@ -4,7 +4,8 @@ from .models import model_food
 from .forms import FoodForm
 from django.template import loader
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView
 
 
 # Create your views here.
@@ -15,6 +16,24 @@ from django.views.generic import ListView, DetailView
 #
 #     }
 #     return render(request, 'Food/index.html', context)
+
+# def food_detail(request, item_id):
+#     detail = model_food.objects.get(pk=item_id)
+#     context = {
+#         'detail': detail,
+#     }
+#     return render(request, 'Food/food_detail.html', context)
+
+# def add_food(request):
+#     form = FoodForm(request.POST or None)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('index')
+#     context = {
+#         'form': form
+#
+#     }
+#     return render(request, 'Food/add_food.html', context)
 
 
 # implementing class based views in django
@@ -30,25 +49,16 @@ class ClassFoodDetail(DetailView):
     context_object_name = 'detail'
 
 
-# def food_detail(request, item_id):
-#     detail = model_food.objects.get(pk=item_id)
-#     context = {
-#         'detail': detail,
-#     }
-#     return render(request, 'Food/food_detail.html', context)
+class ClassAddFood(LoginRequiredMixin, CreateView):
+    login_url = 'login'
+    redirect_field_name = 'redirect_to'
+    model = model_food
+    fields = ['food_name', 'food_desc', 'food_price', 'food_image']
+    template_name = 'Food/add_food.html'
 
-
-@login_required
-def add_food(request):
-    form = FoodForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('index')
-    context = {
-        'form': form
-
-    }
-    return render(request, 'Food/add_food.html', context)
+    def form_valid(self, form):
+        form.instance.user_name = self.request.user
+        return super().form_valid(form)
 
 
 def edit_food(request, id):
